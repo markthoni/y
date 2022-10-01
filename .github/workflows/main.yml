@@ -50,7 +50,7 @@ jobs:
           cd "${upstream_dir}"
           DATE=`date +%Y%m%d%H%M%S`
           echo "current git push time: $DATE"
-          sed -i "1i$DATE" ./time.txt
+          sed -i "1i$DATE" time.txt
           git add time.txt
           git config user.name github-actions
           git config user.email github-actions@github.com
