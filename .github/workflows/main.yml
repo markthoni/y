@@ -48,5 +48,12 @@ jobs:
           target_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${TARGET_REPOSITORY}.git"
           git clone "${upstream_repo}" -b "${UPSTREAM_BRANCH}" --single-branch
           cd "${upstream_dir}"
+          DATE=`date +%Y%m%d%H%M%S`
+          echo "current git push time: $DATE"
+          sed -i "1i$DATE" ./time.txt
+          git add time.txt
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -m "update"
           git push --force --follow-tags --tags "${target_repo}" "${UPSTREAM_BRANCH}:${TARGET_BRANCH}"
           rm -rf "../${upstream_dir}"          
